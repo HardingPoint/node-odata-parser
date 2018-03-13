@@ -336,6 +336,13 @@ otherFunc2                 = f:otherFunctions2Arg "(" arg0:part "," WSP? arg1:pa
                                       func: "replace",
                                       args: [arg0, arg1, arg2]
                                   }
+                              } /
+                              "contains" "(" arg0:part "," WSP? arg1:part ")" {
+                                    return {
+                                        type: "functioncall",
+                                        func: "indexof",
+                                        args: [arg0, arg1]
+                                    }
                               }
 
 cond                        = a:part WSP op:op WSP b:part {
