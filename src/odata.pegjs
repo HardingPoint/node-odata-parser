@@ -273,17 +273,17 @@ filter                      =   "$filter=" list:filterExpr {
                                 }
                             /   "$filter=" .* { return {"error": 'invalid $filter parameter'}; }
 
-filterExpr                  = 
-                              left:("(" WSP? filter:filterExpr WSP? ")"{return filter}) right:( WSP type:("and"/"or") WSP value:filterExpr{
-                                    return { type: type, value: value}
-                              })? {
-                                return filterExprHelper(left, right);
-                              } / 
-                              left:cond right:( WSP type:("and"/"or") WSP value:filterExpr{
-                                    return { type: type, value: value}
-                              })? {
-                                return filterExprHelper(left, right);
-                              }
+    filterExpr                  =
+                                  left:("(" WSP? filter:filterExpr WSP? ")"{return filter}) right:( WSP type:("and"/"or") WSP value:filterExpr{
+                                        return { type: type, value: value}
+                                  })? {
+                                    return filterExprHelper(left, right);
+                                  } /
+                                  left:cond right:( WSP type:("and"/"or") WSP value:filterExpr{
+                                        return { type: type, value: value}
+                                  })? {
+                                    return filterExprHelper(left, right);
+                                  }
 
 booleanFunctions2Args       = "substringof" / "endswith" / "startswith" / "IsOf"
 
@@ -314,7 +314,7 @@ otherFunc1                  = f:otherFunctions1Arg "(" arg0:part ")" {
                                   }
                               }
 
-otherFunctions2Arg         = "indexof" / "concat" / "substring" / "replace"
+otherFunctions2Arg         = "indexof" / "concat" / "substring" / "replace" / "contains"
 
 otherFunc2                 = f:otherFunctions2Arg "(" arg0:part "," WSP? arg1:part ")" {
                                   return {
